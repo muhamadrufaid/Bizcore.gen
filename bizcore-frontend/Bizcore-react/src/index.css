@@ -1,0 +1,87 @@
+.custom-bottom-shadow-white {
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.2);
+  /* Black bottom shadow */
+}
+
+.custom-bottom-shadow-black {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  /* Black bottom shadow */
+}
+
+.custom-shadow-black {
+  box-shadow: 0 4px 6px rgba(1, 0, 1, 0.4);
+  /* Black bottom shadow */
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #6561e798;
+  /* Green color */
+  border-radius: 10px;
+}
+
+.custom-scrollbar-user::-webkit-scrollbar {
+  width: 4px;
+  height: 1px;
+}
+
+.custom-scrollbar-user::-webkit-scrollbar-thumb {
+  background: #ffffff98;
+  /* Green color */
+  border-radius: 10px;
+}
+
+
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.custom-scrollbar-itemtable::-webkit-scrollbar {
+  width: 6px;
+  height: 4px;
+}
+
+.custom-scrollbar-sidebar::-webkit-scrollbar-track {
+  background: #8c69ff;
+}
+
+.custom-scrollbar-sidebar::-webkit-scrollbar {
+  width: 5px;
+  height: 4px;
+}
+
+.custom-scrollbar-itemtable::-webkit-scrollbar-thumb {
+  background: #9f9fa5;
+  /* gray-color */
+  border-radius: 10px;
+}
+
+.custom-scrollbar-itemtable::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+
+/* Custom Toast Styles */
+.Toastify__toast {
+  width: 1500px;
+  /* Adjust width as needed */
+  height: 100px;
+  /* Adjust height as needed */
+  font-size: 14px;
+  /* Adjust font size if necessary */
+}
+
+.Toastify__toast--success {
+  background-color: #4caf50;
+  /* Success background color */
+}
+
+.Toastify__toast--error {
+  background-color: #f44336;
+  /* Error background color */
+}
