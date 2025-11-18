@@ -1,0 +1,414 @@
+### Create Categories
+POST http://localhost:8000/api/categories/
+Content-Type: application/json
+
+{
+  "name":"electronics"
+}
+
+
+### Create Customer
+POST http://localhost:8000/api/customers/
+Content-Type: application/json
+
+{
+  "name": "BIZCO Traders",
+  "phone": "845990675",
+  "email": "bizco@gmail.com",
+  "billing_address": "malappuram, Kerala",
+  "city": "manjeri",
+  "state": "Kerala",
+  "pincode": "679340",
+  "gst_number": "32AS25K088K",
+  "pan_number": "ABCDE5674F",
+  "current_balance": 0,
+  "status": "active"
+}
+###
+DELETE http://localhost:8000/api/bank-details/5/
+### Create Product
+POST http://localhost:8000/api/products/
+Content-Type: application/json
+
+{
+  "name": "IPHONE 13 PRO",
+  "sku_code": "A13PRO",
+  "barcode": "098892311",
+  "base_price": 81000,
+  "retail_price": 85500,
+  "wholesale_price": 81000,
+  "MRP": 89000,
+  "unit_of_measurement": "pcs",
+  "discount": 1499.00,
+  "gst_rate": 18,
+  "stock_quantity": 10,
+  "re_order_level": 5,
+  "category": 1,
+  "status": "active",
+  "hsn_sac_code": "8400"
+}
+
+### Create Draft Invoice
+POST http://localhost:8000/api/draft-invoices/
+Content-Type: application/json
+
+{
+  "customer": 2,
+  "invoice_type": "individual",
+  "gst_type": "cgst_sgst",
+  "mode_of_supply": "direct",
+  "transportation_mode": "road"
+}
+
+### Fetch Draft Invoice
+GET http://localhost:8000/api/payment-stats/
+
+
+### Add Draft Invoice Item
+POST http://localhost:8000/api/draft-items/
+Content-Type: application/json
+
+{
+  "draft_invoice": 10,
+  "product": 1,
+  "quantity": 4,
+  "special_discount": 0
+}
+
+### List Draft Invoice
+GET http://localhost:8000/api/draft-invoices/
+
+### Finalize Draft → Invoice
+POST http://localhost:8000/api/draft-invoices/9/finalize/
+Content-Type: application/json
+
+
+### List Final Invoices
+GET http://localhost:8000/api/invoices/5/
+
+
+### Final Invoice Cancel
+POST http://localhost:8000/api/invoices/5/cancel/
+Content-Type: application/json
+
+### Customer Returned Product
+POST http://localhost:8000/api/credit-notes/
+Content-Type: application/json
+
+{
+  "invoice": 5,
+  "reason": "Customer returned product",
+  "amount": "93811.00"
+}
+
+### 
+POST http://localhost:8000/api/debit-notes/
+Content-Type: application/json
+
+{
+  "invoice": 3,
+  "reason": "Freight charges added",
+  "amount": "500.00"
+}
+
+###
+### Send WhatsApp Message
+POST http://127.0.0.1:8000/api/send-whatsapp/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "receiver_phone": "+919544185479",
+  "message": "hello"
+}
+
+###
+POST http://localhost:8000/api/staffs/
+Content-Type: application/json
+
+{
+  "name":"Arun MP",
+  "phone":"95XXXX2232",
+  "email":"mparun@gmail.com",
+  "date_of_bith":"2002-01-01"
+}
+
+# API Documentation for Invoice Creation
+
+### Direct Invoice Creation
+POST http://127.0.0.1:8000/api/invoices/
+Content-Type: application/json
+
+{
+  "customer": 1,
+  "invoice_type": "individual",
+  "gst_type": "cgst_sgst",
+  "mode_of_supply": "direct",
+  "transportation_mode": "road",
+  "tax_status": "unpaid",
+  "items": [
+    {
+      "product_id": 1,
+      "quantity": 2,
+      "special_discount": 0,
+      "net_value": 1000.00,
+      "gst_amount": 180.00,
+      "cgst_amount": 90.00,
+      "sgst_amount": 90.00,
+      "igst_amount": 0.00,
+      "item_total": 1180.00
+    },
+    {
+      "product_id": 2,
+      "quantity": 2,
+      "special_discount": 10,
+      "net_value": 2000.00,
+      "gst_amount": 360.00,
+      "cgst_amount": 180.00,
+      "sgst_amount": 180.00,
+      "igst_amount": 0.00,
+      "item_total": 2360.00
+    }
+  ]
+}
+
+###
+POST http://127.0.0.1:8000/api/draft-invoices/
+Content-Type: application/json
+
+{
+  "customer": 1,
+  "invoice_type": "individual",
+  "gst_type": "cgst_sgst",
+  "mode_of_supply": "direct",
+  "transportation_mode": "road",
+  "tax_status": "unpaid",
+  "items": [
+    {
+      "product": 1,
+      "quantity": 2
+    }
+  ]
+}
+
+###
+POST http://127.0.0.1:8000/api/draft-invoices/
+Content-Type: application/json
+
+{
+  "customer": 1,
+  "invoice_type": "individual",
+  "gst_type": "cgst_sgst",
+  "mode_of_supply": "direct",
+  "transportation_mode": "road",
+  "tax_status": "unpaid",
+  "items": [
+    {
+      "product": 8,
+      "quantity": 1
+    }
+  ]
+}
+
+###
+GET http://127.0.0.1:8000/api/draft-invoices/231/
+
+### Create a Purchase with Purchase Items
+
+POST http://127.0.0.1:8000/api/purchase/
+Content-Type: application/json
+
+{
+  "vendor": 2,
+  "invoice_number": "INV-12345",
+  "purchase_date": "2025-10-12",
+  "discount": 1000.00,
+  "amount_paid": 800.00,
+  "status": "pending",
+  "items": [
+    {
+      "product": 1,
+      "quantity": 10,
+      "unit_cost": 100.00,
+      "total_cost": 1000.00,
+      "gst_percentage": 18.00,
+      "total_tax": 180.00,
+      "item_total": 1180.00
+    },
+    {
+      "product": 5,
+      "quantity": 5,
+      "unit_cost": 150.00,
+      "total_cost": 750.00,
+      "gst_percentage": 18.00,
+      "total_tax": 135.00,
+      "item_total": 885.00
+    }
+  ]
+}
+
+### Create Vendor
+PUT  http://localhost:8000/api/vendors/1/
+Content-Type: application/json
+
+{
+  "company_name": "HI TECH GROUP Pvt Ltd.",
+  "contact_person": "John Paul",
+  "phone": "99521411",
+  "email": "hitechgrp@gmail.com",
+  "gst_number": "GSTINXXXX22",
+  "address": "Trissur DV8",
+  "status": "active"
+}
+###
+
+POST http://localhost:8000/api/draft-invoices/245/finalize/
+Content-Type: application/json
+
+###
+GET http://localhost:8000/api/invoices/
+###
+
+POST http://127.0.0.1:8000/api/invoices/
+Content-Type: application/json
+
+{
+  "customer": 2,
+  "invoice_type": "individual",
+  "gst_type": "cgst_sgst",
+  "mode_of_supply": "direct",
+  "transportation_mode": "road",
+  "tax_status": "unpaid",
+  "items": [
+    {
+      "product": 1,
+      "quantity": 1,
+      "special_discount": 0
+    }
+  ]
+}
+###
+
+PUT http://127.0.0.1:8000/api/draft-invoices/246/
+Content-Type: application/json
+
+{
+  "id": 246,
+  "items": [
+    {
+      "id": 341,
+      "draft_invoice": 246,
+      "product": 8,
+      "quantity": 1
+    }
+  ],
+  "transportation_mode": "road",
+  "invoice_type": "business",
+  "mode_of_supply": "direct",
+  "invoice_value": "ninety-five thousand five hundred and eighty rupees only",
+  "gst_type": "cgst_sgst",
+  "customer": 1
+}
+###
+
+PUT http://127.0.0.1:8000/api/invoices/156/
+Content-Type: application/json
+
+{
+  "id": 156,
+  "tax_status": "unpaid"
+}
+
+###
+GET http://127.0.0.1:8000/api/draft-invoices/252/
+
+###
+GET http://127.0.0.1:8000/api/invoices/6/
+
+###
+
+POST http://127.0.0.1:8000/api/payments/
+Content-Type: application/json
+
+{
+    "invoice": 162,
+    "customer": 5,
+    "online_amount": 1000,
+    "cash_amount": 1000,
+    "amount_paid": 2000,
+    "payment_mode": "hybrid",
+    "payment_status": "partial",
+    "reference_number": "TXN12345"
+}
+###
+
+DELETE http://127.0.0.1:8000/api/purchase/8/delete-item/9/
+
+###
+GET http://127.0.0.1:8000/api/invoices/152/
+
+###
+GET http://127.0.0.1:8000/api/business-details/
+
+###
+DELETE http://127.0.0.1:8000/api/payments/7/
+
+
+###
+
+### Create Business Details
+POST http://127.0.0.1:8000/api/business-details/
+Content-Type: application/json
+
+{
+    "brand_name": "TechMart",
+    "brand_caption": "Innovating the Future",
+    "business_type": "wholesale",
+    "telephone": "1234567890",
+    "phone_number": "9876543210",
+    "whatsapp_number": "9876543210",
+    "email": "contact@techmart.com",
+    "website_name": "www.techmart.com",
+    "gst_in": "12ABCDE1234F1Z1",
+    "pan_number": "ABCDE1234F",
+    "address": "123 Tech Street, Silicon Valley",
+    "city": "San Francisco",
+    "state": "California",
+    "pincode": "94016"
+}
+###
+
+POST http://127.0.0.1:8000/api/bank-details/
+Content-Type: application/json
+
+{
+    "bank_name": "HDFC",
+    "branch": "Ottalapalam",
+    "ifsc_code": "INS009H",
+    "account_number": "1234567890POM",
+    "upi_id": "najasbank@icici"
+   
+}
+
+###
+GET http://127.0.0.1:8000/api/purchase-stats/
+
+###
+POST http://127.0.0.1:8000/api/brand-details/
+Content-Type: application/json
+
+{
+    "company_name": "Najas Distribution Coff Pvt Ltd.",
+    "company_caption": "Auto Spare Distribution & Custom Spare Making",
+    "business_type": "retail",
+    "telephone": "XXXXXXX98",
+    "whatsapp_number": "XXXXXXX90",
+    "email": "najasdistribution@gmail.com",
+    "website_name": "www.najasCoPvt.com",
+    "gst_in": "XXXAXXBX",
+    "pan_number": "XXXXX45X",
+    "address": "Attapadi Road",
+    "city": "Mannarkad",
+    "state": "Palakkad",
+    "pincode": "XXXX95"
+   
+}
